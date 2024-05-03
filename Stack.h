@@ -1,29 +1,27 @@
-#ifndef _Stack_h
-#define _Stack_h
+#ifndef STACK_H
+#define STACK_H
 
 template <typename T>
-struct node {
+struct Node {
     T value;
-    node *next;
+    Node *next;
 };
 
 template <typename T>
-class Stack{
-    public:
-        Stack();
-        void push(T item);
-        T peek();
-        T pop();
-        
-        int getCount();
-        void printStack();
-    
-    private:
-        int count;
-        node<T> *start;
+class Stack {
+public:
+    Stack();
+    void push(T item);
+    T peek();
+    T pop();
+    int getCount();
+    void printStack();
+    bool isEmpty(); // Added function to check if stack is empty
+private:
+    int count;
+    Node<T> *start;
 };
-
 
 #include "Stack.cpp"
-#endif
 
+#endif

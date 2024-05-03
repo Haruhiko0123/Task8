@@ -3,71 +3,69 @@
 
 using namespace std;
 
-
-template <typename T> Stack<T>::Stack(){
+template <typename T>
+Stack<T>::Stack() {
     count = 0;
-    start = NULL;
+    start = nullptr;
 }
 
-template <typename T> 
-void Stack<T>::push(T item){
-    node<T>  *newnode = new node<T>;
-    newnode->value = item;  
+template <typename T>
+void Stack<T>::push(T item) {
+    Node<T> *newNode = new Node<T>;
+    newNode->value = item;
 
-    if (count == 0){
-        start = newnode;
-        newnode->next = NULL;
+    if (count == 0) {
+        start = newNode;
+        newNode->next = nullptr;
+    } else {
+        newNode->next = start;
+        start = newNode;
     }
-    else{
-        newnode->next = start;
-        start = newnode;
-    }
-    count ++;
+    count++;
 }
 
-
-template <typename T> 
-void Stack<T>::printStack(){
-    node<T> *p;
-    p = start;
-    while (p){
+template <typename T>
+void Stack<T>::printStack() {
+    Node<T> *p = start;
+    while (p) {
         cout << p->value << "\t";
         p = p->next;
     }
     cout << endl;
 }
 
-
-template <typename T> 
-T Stack<T>::peek(){
-    if (start){
+template <typename T>
+T Stack<T>::peek() {
+    if (start) {
         return start->value;
-    }
-    else{
+    } else {
         throw out_of_range("Stack Empty");
     }
 }
 
-
-template <typename T> 
-T Stack<T>::pop(){
+template <typename T>
+T Stack<T>::pop() {
     T result;
 
-    if (count == 0){
+    if (count == 0) {
         throw out_of_range("Stack Empty");
     }
 
-    node<T> *p = start;
+    Node<T> *p = start;
     start = p->next;
     result = p->value;
-    count --;
-    delete(p);
-    
+    count--;
+    delete p;
+
     return result;
 }
 
-
-template <typename T> 
-int Stack<T>::getCount(){
+template <typename T>
+int Stack<T>::getCount() {
     return count;
+}
+
+template <typename T>
+bool Stack<T>::isEmpty() {
+    return count == 0;
 }

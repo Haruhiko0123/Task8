@@ -1,31 +1,31 @@
-#include<iostream>
+#include <iostream>
 #include "Stack.h"
 
 using namespace std;
 
-int main(){
-
-    Stack<int> s;
-    int num;
-
-    for (int i = 0; i < 5; i ++){
-        s.push(i);
+bool check(const string& expression) {
+    Stack<char> stack;
+    for (char c : expression) {
+        if (c == '(') {
+            stack.push(c);
+        } else if (c == ')') {
+            if (stack.isEmpty()) {
+                return false; // Unbalanced parenthesis
+            }
+            stack.pop();
+        }
     }
-    s.printStack();
-    s.pop();
-    s.pop();
-    s.printStack();    
-    cout << "Expecting  2,1 0" <<endl;
+    return stack.isEmpty(); // If stack is empty, all parentheses are matched
+}
 
-    s.push(5);
-    s.push(6);
-    cout << s.peek() <<endl;
+int main() {
+    string ex1 = "(5 + y) * 3(6x)";
+    string ex2 = "(5+ 3)) * 2";
+    string ex3 = ")(";
 
-    while (s.getCount() > 0){
-        num = s.pop();
-        cout << num  <<endl;
-    }
-    
-    cout << s.peek() <<endl;
+    cout << "Expression 1: " << (check(ex1) ? "Balanced" : "Not Balanced") << endl;
+    cout << "Expression 2: " << (check(ex2) ? "Balanced" : "Not Balanced") << endl;
+    cout << "Expression 3: " << (check(ex3) ? "Balanced" : "Not Balanced") << endl;
+
     return 0;
 }
